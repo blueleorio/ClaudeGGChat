@@ -21,12 +21,14 @@ export async function verifyGoogleJwt(
       audience: process.env.GOOGLE_CLOUD_PROJECT_NUMBER,
     });
     const payload = ticket.getPayload();
+    console.log('[jwt-debug] email:', payload?.email, 'email_verified:', payload?.email_verified, 'aud:', payload?.aud);
     if (!payload?.email_verified || payload.email !== CHAT_ISSUER) {
       res.status(401).json({ error: 'Invalid token issuer' });
       return;
     }
     next();
-  } catch {
+  } catch (err) {
+    console.log('[jwt-debug] verifyIdToken error:', (err as Error).message);
     res.status(401).json({ error: 'Token verification failed' });
   }
 }

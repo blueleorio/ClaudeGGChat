@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node \"$HOME/.claude/get-shit-done/bin/gsd-tools.cjs\" commit \"docs: initialize project\" --files .planning/PROJECT.md)",
+      "Bash(git add .planning/PROJECT.md && git commit -m \"docs: initialize project\")",
+      "Bash(git add .planning/config.json && git commit -m \"chore: add project config\")",
+      "Bash(node \"$HOME/.claude/get-shit-done/bin/gsd-tools.cjs\" commit \"docs: complete project research\" --files .planning/research/)",
+      "Bash(git add .planning/REQUIREMENTS.md && git commit -m \"docs: define v1 requirements\")",
+      "Bash(git add .planning/ROADMAP.md .planning/STATE.md .planning/REQUIREMENTS.md && git commit -m \"docs: create roadmap \\(4 phases\\)\")",
+      "WebSearch",
+      "Skill(gsd:execute-phase)",
+      "Bash(curl -s https://claudeggchat-production.up.railway.app/health)",
+      "Bash(cd \"D:\\\\SEV\\\\VSCODE\\\\ClaudeGGChat\" && node \"$HOME/.claude/get-shit-done/bin/gsd-tools.cjs\" state advance-plan 2>&1)",
+      "Bash(test -f \".planning/phases/01-gcp-railway-setup/01-02-SUMMARY.md\" && echo \"SUMMARY exists\" || echo \"MISSING\"\ntest -f \".planning/phases/01-gcp-railway-setup/01-01-SUMMARY.md\" && echo \"01-01 SUMMARY exists\" || echo \"MISSING\")",
+      "Bash(ls D:/SEV/VSCODE/ClaudeGGChat/.planning/phases/01-gcp-railway-setup/*VERIFICATION* 2>/dev/null && echo \"found\" || echo \"none\")",
+      "Bash(test -f D:/SEV/VSCODE/ClaudeGGChat/dist/index.js && echo \"dist/index.js EXISTS\" || echo \"dist/index.js MISSING\")",
+      "Bash(test -f D:/SEV/VSCODE/ClaudeGGChat/.gitignore && echo \"EXISTS\" || echo \"MISSING\")",
+      "Bash(cd D:/SEV/VSCODE/ClaudeGGChat && npm test 2>&1)",
+      "Bash(cd D:/SEV/VSCODE/ClaudeGGChat && npm run build 2>&1)",
+      "Bash(ls D:/SEV/VSCODE/ClaudeGGChat/claudebot-*.json 2>/dev/null && echo \"PRESENT — potential GCP key file in repo root\")",
+      "Bash(node \"$HOME/.claude/get-shit-done/bin/gsd-tools.cjs\" commit \"docs\\(phase-1\\): complete phase execution\" --files \".planning/ROADMAP.md\" \".planning/STATE.md\" \".planning/REQUIREMENTS.md\" \".planning/phases/01-gcp-railway-setup/01-VERIFICATION.md\" 2>&1)"
+    ]
+  }
+}
