@@ -44,7 +44,11 @@ Plans:
   2. Sending a `/claude` event from a space not in `ALLOWED_SPACE_IDS` produces no response and no Anthropic API call
   3. A request without a valid Google JWT bearer token is rejected before any handler runs
   4. Typing `/claude` with no prompt text returns a usage hint card in the thread
-**Plans**: TBD
+**Plans**: 2 plans
+
+Plans:
+- [ ] 02-01-PLAN.md — Security middleware: JWT verification + space allowlist + test scaffold (autonomous)
+- [ ] 02-02-PLAN.md — Event handler: cards helper, chatEvent handler, index.ts wiring, Railway deploy + live verification (human checkpoint)
 
 ### Phase 3: Core Claude Integration
 **Goal**: Any SEV teammate in an authorized space can type `/claude [prompt]` and receive Claude's reply posted as a Google Chat card — the full user-visible value delivered end-to-end without thread context
@@ -78,6 +82,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. GCP & Railway Setup | 2/2 | Complete    | 2026-03-12 |
-| 2. Secure Webhook Foundation | 0/TBD | Not started | - |
+| 2. Secure Webhook Foundation | 0/2 | Not started | - |
 | 3. Core Claude Integration | 0/TBD | Not started | - |
 | 4. Thread Context + Production Hardening | 0/TBD | Not started | - |
