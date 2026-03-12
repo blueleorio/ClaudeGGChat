@@ -16,8 +16,8 @@ describe('GET /health', () => {
 });
 
 describe('POST /', () => {
-  it('returns 200 for placeholder route', async () => {
+  it('returns 401 when no Authorization header (JWT middleware active)', async () => {
     const res = await request(app).post('/').send({ type: 'MESSAGE' });
-    expect(res.status).toBe(200);
+    expect(res.status).toBe(401);
   });
 });

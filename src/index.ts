@@ -1,4 +1,7 @@
 import express from 'express';
+import { verifyGoogleJwt } from './middleware/verifyGoogleJwt';
+import { checkSpaceAllowlist } from './middleware/checkSpaceAllowlist';
+import { handleChatEvent } from './handlers/chatEvent';
 
 export const app = express();
 const PORT = process.env.PORT || 3000;
@@ -13,11 +16,8 @@ app.get('/health', (_req, res) => {
   });
 });
 
-// Placeholder — Phase 2 will add JWT verification and event handling here
-app.post('/', (req, res) => {
-  console.log('Received event:', JSON.stringify(req.body, null, 2));
-  res.status(200).json({ text: 'OK' });
-});
+// Chain: JWT verify → space allowlist → event handler
+app.post('/', verifyGoogleJwt, checkSpaceAllowlist, handleChatEvent);
 
 // Only start listening when this file is the entry point (not imported by tests)
 if (require.main === module) {
