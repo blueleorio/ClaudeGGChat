@@ -1,23 +1,30 @@
-import express from 'express';
-import { verifyGoogleJwt } from './middleware/verifyGoogleJwt';
-import { checkSpaceAllowlist } from './middleware/checkSpaceAllowlist';
-import { handleChatEvent } from './handlers/chatEvent';
+import express from "express";
+import { verifyGoogleJwt } from "./middleware/verifyGoogleJwt";
+import { checkSpaceAllowlist } from "./middleware/checkSpaceAllowlist";
+import { handleChatEvent } from "./handlers/chatEvent";
 
 export const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 
-app.get('/health', (_req, res) => {
+app.get("/health", (_req, res) => {
   res.status(200).json({
-    status: 'healthy',
+    status: "healthy",
     timestamp: new Date().toISOString(),
     uptime: process.uptime(),
   });
 });
 
-// Chain: JWT verify → space allowlist → event handler
-app.post('/', verifyGoogleJwt, checkSpaceAllowlist, handleChatEvent);
+// // Chain: JWT verify → space allowlist → event handler
+// app.post('/', verifyGoogleJwt, checkSpaceAllowlist, handleChatEvent);
+
+// Test endpoint for Google Chat
+app.post("/", (_req, res) => {
+  res.json({
+    text: "Hello World!",
+  });
+});
 
 // Only start listening when this file is the entry point (not imported by tests)
 if (require.main === module) {
