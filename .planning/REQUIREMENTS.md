@@ -38,8 +38,8 @@
 
 ### Infrastructure
 
-- [ ] **INFRA-01**: Server binds to `process.env.PORT` for Railway compatibility
-- [ ] **INFRA-02**: `GET /health` endpoint returns HTTP 200 for Railway health checks
+- [x] **INFRA-01**: Server binds to `process.env.PORT` for Railway compatibility
+- [x] **INFRA-02**: `GET /health` endpoint returns HTTP 200 for Railway health checks
 - [ ] **INFRA-03**: Startup validation fails loudly (process exits) if required env vars are missing (`ANTHROPIC_API_KEY`, `ALLOWED_SPACE_IDS`, `GOOGLE_SERVICE_ACCOUNT_KEY`)
 - [ ] **INFRA-04**: Structured logging includes request ID, space ID, command, and response latency for each invocation
 
@@ -72,8 +72,8 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| INFRA-01 | Phase 1 | Pending |
-| INFRA-02 | Phase 1 | Pending |
+| INFRA-01 | Phase 1 | Complete (01-01) |
+| INFRA-02 | Phase 1 | Complete (01-01) |
 | HOOK-01 | Phase 2 | Pending |
 | HOOK-02 | Phase 2 | Pending |
 | HOOK-03 | Phase 2 | Pending |

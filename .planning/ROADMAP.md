@@ -32,7 +32,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Plans**: 2 plans
 
 Plans:
-- [ ] 01-01-PLAN.md — Project scaffold: Express server, health endpoint, tests, railway.json (autonomous)
+- [x] 01-01-PLAN.md — Project scaffold: Express server, health endpoint, tests, railway.json (autonomous)
 - [ ] 01-02-PLAN.md — Deploy to Railway, GCP Chat API setup, slash command registration, live event verification (human checkpoint)
 
 ### Phase 2: Secure Webhook Foundation
@@ -77,7 +77,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. GCP & Railway Setup | 0/2 | Not started | - |
+| 1. GCP & Railway Setup | 1/2 | In progress | - |
 | 2. Secure Webhook Foundation | 0/TBD | Not started | - |
 | 3. Core Claude Integration | 0/TBD | Not started | - |
 | 4. Thread Context + Production Hardening | 0/TBD | Not started | - |
