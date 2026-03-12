@@ -13,8 +13,8 @@
 
 ### Security
 
-- [ ] **SEC-01**: Every incoming webhook request is verified against Google's JWT bearer token before any processing
-- [ ] **SEC-02**: Requests from spaces not in `ALLOWED_SPACE_IDS` are silently rejected (no Anthropic API call made)
+- [x] **SEC-01**: Every incoming webhook request is verified against Google's JWT bearer token before any processing
+- [x] **SEC-02**: Requests from spaces not in `ALLOWED_SPACE_IDS` are silently rejected (no Anthropic API call made)
 
 ### Context
 
@@ -77,8 +77,8 @@
 | HOOK-01 | Phase 2 | Pending |
 | HOOK-02 | Phase 2 | Pending |
 | HOOK-03 | Phase 2 | Pending |
-| SEC-01 | Phase 2 | Pending |
-| SEC-02 | Phase 2 | Pending |
+| SEC-01 | Phase 2 | Complete |
+| SEC-02 | Phase 2 | Complete |
 | CLDE-01 | Phase 3 | Pending |
 | CLDE-03 | Phase 3 | Pending |
 | CLDE-04 | Phase 3 | Pending |
