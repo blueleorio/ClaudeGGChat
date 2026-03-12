@@ -1,36 +1,16 @@
 import { Request, Response } from 'express';
-
-function buildUsageHintCard() {
-  return {
-    cardsV2: [
-      {
-        cardId: 'usage-hint',
-        card: {
-          header: {
-            title: 'Claude',
-            subtitle: 'Usage hint',
-          },
-          sections: [
-            {
-              widgets: [
-                {
-                  textParagraph: {
-                    text: 'To ask Claude a question, type:<br><b>/claude [your question]</b><br><br>Example: <i>/claude Summarize the last SEV incident</i>',
-                  },
-                },
-              ],
-            },
-          ],
-        },
-      },
-    ],
-  };
-}
+import { buildUsageHintCard } from '../chat/cards';
 
 export async function handleChatEvent(req: Request, res: Response): Promise<void> {
+  // Guard: only handle slash command events
+  if (!req.body?.message?.slashCommand) {
+    res.status(200).json({});
+    return;
+  }
+
   const argumentText = (req.body.message?.argumentText ?? '').trim();
 
-  // HOOK-03: Empty prompt — respond synchronously with usage hint card
+  // HOOK-03: Empty prompt — return usage hint card synchronously
   if (!argumentText) {
     res.status(200).json(buildUsageHintCard());
     return;
@@ -39,11 +19,13 @@ export async function handleChatEvent(req: Request, res: Response): Promise<void
   // HOOK-02: Non-empty prompt — acknowledge immediately, process async
   res.status(200).json({});
 
-  // Async stub: Phase 3 will replace this with real Anthropic + Chat API call
-  setImmediate(async () => {
-    const spaceName: string = req.body.space?.name ?? '';
-    const threadName: string = req.body.message?.thread?.name ?? '';
-    console.log(`[async] Space: ${spaceName}, Thread: ${threadName}, Prompt: "${argumentText}"`);
-    // Phase 3: call Anthropic API and post card via googleapis
+  // Async stub — Phase 3 replaces this with Anthropic API call + Chat card post
+  setImmediate(() => {
+    void (async () => {
+      const spaceName: string = req.body.space.name;
+      const threadName: string = req.body.message.thread.name;
+      console.log(`[async] Space: ${spaceName}, Thread: ${threadName}, Prompt: "${argumentText}"`);
+      // Phase 3: call Anthropic API and post reply card via googleapis
+    })();
   });
 }
