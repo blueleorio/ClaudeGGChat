@@ -4,3 +4,6 @@ dist/
 .env*
 *.json.key
 *.log
+# GCP service account key files
+*-[0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f]*.json
+claudebot-*.json

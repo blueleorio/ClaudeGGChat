@@ -12,7 +12,7 @@ ClaudeGGChat is built in four coarse phases that follow a hard dependency chain:
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: GCP & Railway Setup** - Provision infrastructure, register the bot, and confirm a live HTTPS endpoint before writing application code
+- [x] **Phase 1: GCP & Railway Setup** - Provision infrastructure, register the bot, and confirm a live HTTPS endpoint before writing application code
 - [ ] **Phase 2: Secure Webhook Foundation** - Express server with JWT verification, space allowlist, async response pattern, and empty-prompt handling
 - [ ] **Phase 3: Core Claude Integration** - Full end-to-end bot: Thinking... placeholder, Anthropic API call, cardsV2 reply, and error handling
 - [ ] **Phase 4: Thread Context + Production Hardening** - Thread context injection, startup validation, structured logging, and Railway health check
@@ -33,7 +33,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 Plans:
 - [x] 01-01-PLAN.md — Project scaffold: Express server, health endpoint, tests, railway.json (autonomous)
-- [ ] 01-02-PLAN.md — Deploy to Railway, GCP Chat API setup, slash command registration, live event verification (human checkpoint)
+- [x] 01-02-PLAN.md — Deploy to Railway, GCP Chat API setup, slash command registration, live event verification (human checkpoint)
 
 ### Phase 2: Secure Webhook Foundation
 **Goal**: Users in authorized spaces who type `/claude [prompt]` receive an immediate acknowledgment, unauthorized spaces are silently rejected, and the async response pattern is proven before any slow API calls are added
@@ -77,7 +77,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. GCP & Railway Setup | 1/2 | In progress | - |
+| 1. GCP & Railway Setup | 2/2 | Complete | 2026-03-12 |
 | 2. Secure Webhook Foundation | 0/TBD | Not started | - |
 | 3. Core Claude Integration | 0/TBD | Not started | - |
 | 4. Thread Context + Production Hardening | 0/TBD | Not started | - |
