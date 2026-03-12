@@ -16,6 +16,10 @@ export async function verifyGoogleJwt(
   }
   const token = authHeader.slice(7);
   try {
+    const rawPayload = JSON.parse(Buffer.from(token.split('.')[1], 'base64').toString());
+    console.log('[jwt-debug] token aud:', rawPayload.aud, '| email:', rawPayload.email);
+  } catch { /* ignore decode errors */ }
+  try {
     const ticket = await client.verifyIdToken({
       idToken: token,
       audience: process.env.GOOGLE_CLOUD_PROJECT_NUMBER,
