@@ -29,7 +29,11 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. The `/claude` slash command is registered in Google Cloud Console pointing at the Railway HTTPS URL
   4. Sending `/claude test` in the authorized test space delivers a POST event to the Railway log (bot is reachable)
   5. Required environment variables (`ANTHROPIC_API_KEY`, `ALLOWED_SPACE_IDS`, `GOOGLE_SERVICE_ACCOUNT_KEY`) are set in Railway
-**Plans**: TBD
+**Plans**: 2 plans
+
+Plans:
+- [ ] 01-01-PLAN.md — Project scaffold: Express server, health endpoint, tests, railway.json (autonomous)
+- [ ] 01-02-PLAN.md — Deploy to Railway, GCP Chat API setup, slash command registration, live event verification (human checkpoint)
 
 ### Phase 2: Secure Webhook Foundation
 **Goal**: Users in authorized spaces who type `/claude [prompt]` receive an immediate acknowledgment, unauthorized spaces are silently rejected, and the async response pattern is proven before any slow API calls are added
@@ -73,7 +77,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. GCP & Railway Setup | 0/TBD | Not started | - |
+| 1. GCP & Railway Setup | 0/2 | Not started | - |
 | 2. Secure Webhook Foundation | 0/TBD | Not started | - |
 | 3. Core Claude Integration | 0/TBD | Not started | - |
 | 4. Thread Context + Production Hardening | 0/TBD | Not started | - |
