@@ -26,7 +26,8 @@ export async function verifyGoogleJwt(
       return;
     }
     next();
-  } catch {
+  } catch (err) {
+    console.log('[jwt-debug] error:', (err as Error).message, '| audience env:', process.env.GOOGLE_CLOUD_PROJECT_NUMBER);
     res.status(401).json({ error: 'Token verification failed' });
   }
 }
