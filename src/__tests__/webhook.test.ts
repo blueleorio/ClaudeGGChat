@@ -86,6 +86,40 @@ describe('POST / — Space allowlist (SEC-02)', () => {
   });
 });
 
+describe('POST / — Non-slash-command guard (HOOK-01)', () => {
+  it('returns 200 with empty body when event has no slashCommand field (even with empty argumentText)', async () => {
+    const nonSlashBody = {
+      type: 'MESSAGE',
+      message: {
+        argumentText: '',
+        // No slashCommand field — this is a plain @mention or other event
+        thread: { name: 'spaces/AAAA8WYwwy4/threads/t1' },
+      },
+      space: { name: 'spaces/AAAA8WYwwy4' },
+    };
+    const res = await request(app)
+      .post('/')
+      .set('Authorization', 'Bearer valid.jwt.token')
+      .send(nonSlashBody);
+    expect(res.status).toBe(200);
+    // Must be {} not a usage hint card — non-slash events are silently ignored
+    expect(res.body).toEqual({});
+  });
+
+  it('returns 200 with empty body when message field is absent entirely', async () => {
+    const noMessageBody = {
+      type: 'ADDED_TO_SPACE',
+      space: { name: 'spaces/AAAA8WYwwy4' },
+    };
+    const res = await request(app)
+      .post('/')
+      .set('Authorization', 'Bearer valid.jwt.token')
+      .send(noMessageBody);
+    expect(res.status).toBe(200);
+    expect(res.body).toEqual({});
+  });
+});
+
 describe('POST / — Event parsing and handler (HOOK-01, HOOK-02, HOOK-03)', () => {
   it('returns 200 immediately for a valid request with a prompt (HOOK-02)', async () => {
     const res = await request(app)
