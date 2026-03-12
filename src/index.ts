@@ -16,15 +16,14 @@ app.get("/health", (_req, res) => {
   });
 });
 
-// // Chain: JWT verify → space allowlist → event handler
-// app.post('/', verifyGoogleJwt, checkSpaceAllowlist, handleChatEvent);
+// Chain: JWT verify → space allowlist → event handler
+app.post("/", verifyGoogleJwt, checkSpaceAllowlist, handleChatEvent);
 
-// Test endpoint for Google Chat
-app.post("/", (_req, res) => {
-  res.json({
-    text: "Hello World!",
-  });
-});
+// // Test endpoint for Google Chat
+// app.post("/", (req, res) => {
+//   console.log("Received event:", JSON.stringify(req.body, null, 2));
+//   res.status(200).json({ text: "OK" });
+// });
 
 // Only start listening when this file is the entry point (not imported by tests)
 if (require.main === module) {
