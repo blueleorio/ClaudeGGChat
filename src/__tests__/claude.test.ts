@@ -92,7 +92,6 @@ describe('callClaude', () => {
       content: [{ type: 'text', text: 'Reply' }],
     });
     const context = [{ role: 'user' as const, content: 'prior message' }];
-    // @ts-expect-error: callClaude does not accept context yet — RED test, Plan 02 adds the param
     await callClaude('prompt', context);
     const callArgs = mockCreate.mock.calls[0][0];
     const messages: { role: string; content: string }[] = callArgs.messages;
