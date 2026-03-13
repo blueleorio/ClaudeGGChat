@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: completed
-stopped_at: Completed 02-02-PLAN.md — chat event handler, cards helper, middleware chain wired, live Railway verification CONFIRMED
-last_updated: "2026-03-13T02:19:51.295Z"
+stopped_at: "Completed 03-01-PLAN.md — Wave 0 TDD scaffold: @anthropic-ai/sdk installed, 3 failing test files created"
+last_updated: "2026-03-13T02:54:04.727Z"
 last_activity: 2026-03-13 — Completed 02-02 (chat event handler, cards helper, full middleware chain, live Railway verification CONFIRMED)
 progress:
   total_phases: 4
   completed_phases: 2
-  total_plans: 4
-  completed_plans: 4
+  total_plans: 7
+  completed_plans: 5
   percent: 50
 ---
 
@@ -54,6 +54,7 @@ Progress: [█████░░░░░] 50%
 | 2. Secure Webhook Foundation | 2 | ~57 min | ~28 min |
 
 *Updated after each plan completion*
+| Phase 03-core-claude-integration P01 | 8 | 2 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -76,6 +77,9 @@ Recent decisions affecting current work:
 - [Phase 02-01]: Module-level OAuth2Client singleton in verifyGoogleJwt.ts so JWKS caching works across requests in production
 - [Phase 02-02]: JWT audience must be BOT_ENDPOINT (Railway URL) not GOOGLE_CLOUD_PROJECT_NUMBER — app is a Google Workspace Add-on, not a native Chat App
 - [Phase 02-02]: setImmediate used for async stub to guarantee 200 flushes before async work — meets Google Chat 3s timeout
+- [Phase 03-core-claude-integration]: Wave 0 TDD gate established: all Phase 3 test stubs written before any implementation module exists
+- [Phase 03-core-claude-integration]: claude.test.ts mocks @anthropic-ai/sdk via jest.mock to isolate unit tests from real API calls
+- [Phase 03-core-claude-integration]: chatEvent.test.ts uses setImmediate(resolve) to let async block run before asserting on mock calls
 
 ### Pending Todos
 
@@ -93,6 +97,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-13T02:19:16.277Z
-Stopped at: Completed 02-02-PLAN.md — chat event handler, cards helper, middleware chain wired, live Railway verification CONFIRMED
+Last session: 2026-03-13T02:54:04.717Z
+Stopped at: Completed 03-01-PLAN.md — Wave 0 TDD scaffold: @anthropic-ai/sdk installed, 3 failing test files created
 Resume file: None

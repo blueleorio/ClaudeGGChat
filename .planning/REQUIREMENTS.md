@@ -24,17 +24,17 @@
 
 ### Claude
 
-- [ ] **CLDE-01**: Bot calls `claude-sonnet-4-6` with a SEV team system prompt and the user's prompt
+- [x] **CLDE-01**: Bot calls `claude-sonnet-4-6` with a SEV team system prompt and the user's prompt
 - [ ] **CLDE-02**: Thread context messages are passed to Claude as context preceding the user prompt
-- [ ] **CLDE-03**: Bot posts a "Thinking…" placeholder card immediately after receiving the command, then PATCHes it with Claude's reply
-- [ ] **CLDE-04**: Anthropic rate limit errors (429/529) result in a user-facing error card rather than a silent failure
-- [ ] **CLDE-05**: Anthropic timeout (25s budget) results in a user-facing error card
+- [x] **CLDE-03**: Bot posts a "Thinking…" placeholder card immediately after receiving the command, then PATCHes it with Claude's reply
+- [x] **CLDE-04**: Anthropic rate limit errors (429/529) result in a user-facing error card rather than a silent failure
+- [x] **CLDE-05**: Anthropic timeout (25s budget) results in a user-facing error card
 
 ### Response
 
-- [ ] **RESP-01**: Claude's reply is posted as a `cardsV2` Google Chat card with a "Claude" header
-- [ ] **RESP-02**: Error replies (rate limit, timeout, auth failure, empty prompt) are posted as structured error cards
-- [ ] **RESP-03**: If card schema fails, bot falls back to posting a plain-text message rather than silently failing
+- [x] **RESP-01**: Claude's reply is posted as a `cardsV2` Google Chat card with a "Claude" header
+- [x] **RESP-02**: Error replies (rate limit, timeout, auth failure, empty prompt) are posted as structured error cards
+- [x] **RESP-03**: If card schema fails, bot falls back to posting a plain-text message rather than silently failing
 
 ### Infrastructure
 
@@ -79,13 +79,13 @@
 | HOOK-03 | Phase 2 | Complete |
 | SEC-01 | Phase 2 | Complete |
 | SEC-02 | Phase 2 | Complete |
-| CLDE-01 | Phase 3 | Pending |
-| CLDE-03 | Phase 3 | Pending |
-| CLDE-04 | Phase 3 | Pending |
-| CLDE-05 | Phase 3 | Pending |
-| RESP-01 | Phase 3 | Pending |
-| RESP-02 | Phase 3 | Pending |
-| RESP-03 | Phase 3 | Pending |
+| CLDE-01 | Phase 3 | Complete |
+| CLDE-03 | Phase 3 | Complete |
+| CLDE-04 | Phase 3 | Complete |
+| CLDE-05 | Phase 3 | Complete |
+| RESP-01 | Phase 3 | Complete |
+| RESP-02 | Phase 3 | Complete |
+| RESP-03 | Phase 3 | Complete |
 | CONT-01 | Phase 4 | Pending |
 | CONT-02 | Phase 4 | Pending |
 | CONT-03 | Phase 4 | Pending |
