@@ -8,8 +8,6 @@ if (!process.env.ANTHROPIC_API_KEY) {
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
 export async function callClaude(prompt: string): Promise<string> {
-  console.log("You somehow end up in the ClaudeCode here!");
-
   const message = await anthropic.messages.create(
     {
       model: "claude-sonnet-4-6",

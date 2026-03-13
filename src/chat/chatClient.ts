@@ -2,8 +2,6 @@ import { google } from "googleapis";
 import { OAuth2Client } from "google-auth-library";
 
 function getChatClient() {
-  console.log("You somehow end up in the chatClient here!");
-
   const keyJson = process.env.GOOGLE_SERVICE_ACCOUNT_KEY;
   if (!keyJson) throw new Error("GOOGLE_SERVICE_ACCOUNT_KEY is not set");
   const key = JSON.parse(keyJson) as Record<string, unknown>;
