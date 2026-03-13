@@ -1,7 +1,9 @@
 import { Request, Response } from "express";
 import Anthropic from "@anthropic-ai/sdk";
+import { randomUUID } from "crypto";
 import { chatClient } from "../chat/chatClient";
 import { callClaude } from "../claude/anthropicClient";
+import type { ContextMessage } from "../claude/anthropicClient";
 import {
   buildUsageHintCard,
   buildReplyCard,
@@ -37,10 +39,54 @@ export async function handleChatEvent(
 
   setImmediate(() => {
     void (async () => {
+      const startTime = Date.now();
+      const requestId = randomUUID();
+
       const spaceName: string =
         req.body?.chat?.appCommandPayload?.message?.space?.name;
       const threadName: string =
         req.body?.chat?.appCommandPayload?.message?.thread?.name;
+      const triggeringMsgName: string | undefined =
+        req.body?.chat?.appCommandPayload?.message?.name;
+
+      // Step 0: Fetch thread context (best-effort — CONT-03)
+      let contextMessages: ContextMessage[] = [];
+      try {
+        const listRes = await chatClient.spaces.messages.list({
+          parent: spaceName,
+          pageSize: 10,
+          orderBy: "createTime DESC",
+          filter: `thread.name = "${threadName}"`,
+        });
+        let rawMessages = (listRes.data.messages ?? []).reverse();
+
+        // Fallback: if filter returned empty and thread exists, try client-side filter
+        if (rawMessages.length === 0 && threadName) {
+          const fallbackRes = await chatClient.spaces.messages.list({
+            parent: spaceName,
+            pageSize: 50,
+            orderBy: "createTime DESC",
+          });
+          rawMessages = (fallbackRes.data.messages ?? [])
+            .filter((m: any) => m.thread?.name === threadName)
+            .slice(0, 10)
+            .reverse();
+        }
+
+        // Filter: exclude bot messages and the triggering command message
+        const filtered = rawMessages.filter(
+          (m: any) =>
+            m.sender?.type !== "BOT" &&
+            (!triggeringMsgName || m.name !== triggeringMsgName),
+        );
+
+        // Map to ContextMessage format — only messages with text content
+        contextMessages = filtered
+          .filter((m: any) => m.text && m.text.trim() !== "")
+          .map((m: any) => ({ role: "user" as const, content: m.text as string }));
+      } catch {
+        // CONT-03: best-effort — proceed without context on any error (including 403)
+      }
 
       // Step 1: Post "Thinking..." placeholder card
       let messageName: string;
@@ -63,7 +109,7 @@ export async function handleChatEvent(
       let replyBody: object;
       let fallbackText: string;
       try {
-        const replyText = await callClaude(argumentText);
+        const replyText = await callClaude(argumentText, contextMessages);
         replyBody = buildReplyCard(replyText);
         fallbackText = replyText;
       } catch (err) {
@@ -93,6 +139,16 @@ export async function handleChatEvent(
           updateMask: "cardsV2",
           requestBody: replyBody,
         });
+        // Log after successful PATCH (INFRA-04)
+        console.log(
+          JSON.stringify({
+            requestId,
+            spaceId: spaceName,
+            command: argumentText,
+            latencyMs: Date.now() - startTime,
+            status: "ok",
+          }),
+        );
       } catch {
         // RESP-03: card schema failed — fall back to plain text
         try {
@@ -101,10 +157,30 @@ export async function handleChatEvent(
             updateMask: "text",
             requestBody: { text: fallbackText },
           });
+          // Log after successful text fallback PATCH (INFRA-04)
+          console.log(
+            JSON.stringify({
+              requestId,
+              spaceId: spaceName,
+              command: argumentText,
+              latencyMs: Date.now() - startTime,
+              status: "ok",
+            }),
+          );
         } catch {
           console.error(
             "[async] Failed to post both card and plain-text reply for message:",
             messageName,
+          );
+          // Log on full PATCH failure (INFRA-04)
+          console.log(
+            JSON.stringify({
+              requestId,
+              spaceId: spaceName,
+              command: argumentText,
+              latencyMs: Date.now() - startTime,
+              status: "error",
+            }),
           );
         }
       }
