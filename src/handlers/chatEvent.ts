@@ -33,6 +33,7 @@ export async function handleChatEvent(
 
   // Route /frappe (command ID 2)
   if (appCommandId === 2) {
+    console.log("🔗 Frappe integration coming soon!");
     const prompt = (
       req.body?.chat?.appCommandPayload?.message?.argumentText ?? ""
     ).trim();
@@ -99,7 +100,10 @@ export async function handleChatEvent(
         // Map to ContextMessage format — only messages with text content
         contextMessages = filtered
           .filter((m: any) => m.text && m.text.trim() !== "")
-          .map((m: any) => ({ role: "user" as const, content: m.text as string }));
+          .map((m: any) => ({
+            role: "user" as const,
+            content: m.text as string,
+          }));
       } catch {
         // CONT-03: best-effort — proceed without context on any error (including 403)
       }
