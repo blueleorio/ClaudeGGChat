@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: completed
-stopped_at: "Completed 03-01-PLAN.md — Wave 0 TDD scaffold: @anthropic-ai/sdk installed, 3 failing test files created"
-last_updated: "2026-03-13T02:54:04.727Z"
+stopped_at: Completed 03-02-PLAN.md — anthropicClient, systemPrompt, chatClient, extended cards; claude.test.ts and cards.test.ts GREEN
+last_updated: "2026-03-13T02:58:28.243Z"
 last_activity: 2026-03-13 — Completed 02-02 (chat event handler, cards helper, full middleware chain, live Railway verification CONFIRMED)
 progress:
   total_phases: 4
   completed_phases: 2
   total_plans: 7
-  completed_plans: 5
+  completed_plans: 6
   percent: 50
 ---
 
@@ -55,6 +55,7 @@ Progress: [█████░░░░░] 50%
 
 *Updated after each plan completion*
 | Phase 03-core-claude-integration P01 | 8 | 2 tasks | 5 files |
+| Phase 03-core-claude-integration P02 | 6 | 2 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -80,6 +81,9 @@ Recent decisions affecting current work:
 - [Phase 03-core-claude-integration]: Wave 0 TDD gate established: all Phase 3 test stubs written before any implementation module exists
 - [Phase 03-core-claude-integration]: claude.test.ts mocks @anthropic-ai/sdk via jest.mock to isolate unit tests from real API calls
 - [Phase 03-core-claude-integration]: chatEvent.test.ts uses setImmediate(resolve) to let async block run before asserting on mock calls
+- [Phase 03-02]: callClaude does NOT catch SDK errors — callers handle Anthropic error classes
+- [Phase 03-02]: ANTHROPIC_API_KEY guard throws at import time — missing key causes startup failure
+- [Phase 03-02]: chatClient singleton instantiated at module load; tests mock entire module so real GOOGLE_SERVICE_ACCOUNT_KEY not needed in tests
 
 ### Pending Todos
 
@@ -97,6 +101,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-13T02:54:04.717Z
-Stopped at: Completed 03-01-PLAN.md — Wave 0 TDD scaffold: @anthropic-ai/sdk installed, 3 failing test files created
+Last session: 2026-03-13T02:58:28.236Z
+Stopped at: Completed 03-02-PLAN.md — anthropicClient, systemPrompt, chatClient, extended cards; claude.test.ts and cards.test.ts GREEN
 Resume file: None
