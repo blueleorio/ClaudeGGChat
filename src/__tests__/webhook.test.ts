@@ -24,13 +24,16 @@ const MockOAuth2Client = OAuth2Client as jest.MockedClass<typeof OAuth2Client>;
 
 // Shared helper to build a valid request body
 const validBody = (argumentText: string) => ({
-  type: 'MESSAGE',
-  message: {
-    argumentText,
-    slashCommand: { commandId: '1' },
-    thread: { name: 'spaces/AAAA8WYwwy4/threads/t1' },
+  chat: {
+    appCommandPayload: {
+      appCommandMetadata: { appCommandType: 'SLASH_COMMAND' },
+      message: {
+        argumentText,
+        space: { name: 'spaces/AAAA8WYwwy4' },
+        thread: { name: 'spaces/AAAA8WYwwy4/threads/t1' },
+      },
+    },
   },
-  space: { name: 'spaces/AAAA8WYwwy4' },
 });
 
 beforeEach(() => {
@@ -77,13 +80,16 @@ describe('POST / — JWT verification (SEC-01)', () => {
 describe('POST / — Space allowlist (SEC-02)', () => {
   it('returns 200 with empty body when space is not in ALLOWED_SPACE_IDS', async () => {
     const unlistedBody = {
-      type: 'MESSAGE',
-      message: {
-        argumentText: ' hello world',
-        slashCommand: { commandId: '1' },
-        thread: { name: 'spaces/UNLISTED999/threads/t1' },
+      chat: {
+        appCommandPayload: {
+          appCommandMetadata: { appCommandType: 'SLASH_COMMAND' },
+          message: {
+            argumentText: ' hello world',
+            space: { name: 'spaces/UNLISTED999' },
+            thread: { name: 'spaces/UNLISTED999/threads/t1' },
+          },
+        },
       },
-      space: { name: 'spaces/UNLISTED999' },
     };
     const res = await request(app)
       .post('/')
@@ -105,13 +111,16 @@ describe('POST / — Space allowlist (SEC-02)', () => {
 describe('POST / — Non-slash-command guard (HOOK-01)', () => {
   it('returns 200 with empty body when event has no slashCommand field (even with empty argumentText)', async () => {
     const nonSlashBody = {
-      type: 'MESSAGE',
-      message: {
-        argumentText: '',
-        // No slashCommand field — this is a plain @mention or other event
-        thread: { name: 'spaces/AAAA8WYwwy4/threads/t1' },
+      chat: {
+        appCommandPayload: {
+          // No appCommandMetadata — type check sees undefined and returns {}
+          message: {
+            argumentText: '',
+            space: { name: 'spaces/AAAA8WYwwy4' },
+            thread: { name: 'spaces/AAAA8WYwwy4/threads/t1' },
+          },
+        },
       },
-      space: { name: 'spaces/AAAA8WYwwy4' },
     };
     const res = await request(app)
       .post('/')
@@ -124,8 +133,9 @@ describe('POST / — Non-slash-command guard (HOOK-01)', () => {
 
   it('returns 200 with empty body when message field is absent entirely', async () => {
     const noMessageBody = {
-      type: 'ADDED_TO_SPACE',
-      space: { name: 'spaces/AAAA8WYwwy4' },
+      chat: {
+        // appCommandPayload omitted — type check sees undefined and returns {}
+      },
     };
     const res = await request(app)
       .post('/')

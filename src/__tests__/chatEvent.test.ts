@@ -26,12 +26,16 @@ const mockCallClaude = callClaude as jest.Mock;
 function makeMockReq(argumentText = ' hello'): Partial<Request> {
   return {
     body: {
-      message: {
-        slashCommand: {},
-        argumentText,
-        thread: { name: 'spaces/X/threads/t1' },
+      chat: {
+        appCommandPayload: {
+          appCommandMetadata: { appCommandType: 'SLASH_COMMAND' },
+          message: {
+            argumentText,
+            space: { name: 'spaces/X' },
+            thread: { name: 'spaces/X/threads/t1' },
+          },
+        },
       },
-      space: { name: 'spaces/X' },
     },
   };
 }
