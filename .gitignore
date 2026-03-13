@@ -7,3 +7,5 @@ dist/
 # GCP service account key files
 *-[0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f]*.json
 claudebot-*.json
+frappe_api_keys.csv
+settings.local.json

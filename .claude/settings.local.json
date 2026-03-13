@@ -56,7 +56,10 @@
       "Bash(git commit -m \"$\\(cat <<'EOF'\ndocs\\(phase-3\\): complete phase execution\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>\nEOF\n\\)\")",
       "Skill(gsd:plan-phase)",
       "Bash(cd /d/SEV/VSCODE/ClaudeGGChat && npx jest --no-coverage 2>&1 | tail -20)",
-      "Bash(cd D:/SEV/VSCODE/ClaudeGGChat && node \"$HOME/.claude/get-shit-done/bin/gsd-tools.cjs\" commit \"chore: archive phase directories from completed milestones\" --files .planning/milestones/ .planning/phases/)"
+      "Bash(cd D:/SEV/VSCODE/ClaudeGGChat && node \"$HOME/.claude/get-shit-done/bin/gsd-tools.cjs\" commit \"chore: archive phase directories from completed milestones\" --files .planning/milestones/ .planning/phases/)",
+      "Bash(npm run:*)",
+      "Bash(git add:*)",
+      "Bash(git push:*)"
     ]
   }
 }
