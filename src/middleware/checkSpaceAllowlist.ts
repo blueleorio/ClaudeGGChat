@@ -12,12 +12,13 @@ export function checkSpaceAllowlist(
 
   // const spaceName: string = req.body?.space?.name ?? "";
   const spaceName: string =
-    req.body?.chat?.message?.space?.name ?? req.body?.space?.name ?? "";
+    req.body?.chat?.appCommandPayload?.message?.space?.name ?? "";
 
-  const threadName: string = req.body?.chat?.message?.thread?.name ?? "";
+  const threadName: string =
+    req.body?.chat?.appCommandPayload?.message?.thread?.name ?? "";
 
   const prompt: string =
-    req.body?.appCommandPayload?.argumentText?.trim() ?? "";
+    req.body?.chat?.appCommandPayload?.message?.argumentText?.trim() ?? "";
 
   console.log("BODY:", JSON.stringify(req.body, null, 2));
   console.log("Received spaceName:", spaceName);
