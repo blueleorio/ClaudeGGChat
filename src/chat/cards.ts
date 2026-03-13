@@ -24,3 +24,43 @@ export function buildUsageHintCard(): object {
     ],
   };
 }
+
+export function buildReplyCard(replyText: string): object {
+  return {
+    cardsV2: [
+      {
+        cardId: 'claude-reply',
+        card: {
+          header: { title: 'Claude' },
+          sections: [
+            {
+              widgets: [
+                { textParagraph: { text: replyText } },
+              ],
+            },
+          ],
+        },
+      },
+    ],
+  };
+}
+
+export function buildErrorCard(errorMessage: string): object {
+  return {
+    cardsV2: [
+      {
+        cardId: 'claude-error',
+        card: {
+          header: { title: 'Claude', subtitle: 'Error' },
+          sections: [
+            {
+              widgets: [
+                { textParagraph: { text: errorMessage } },
+              ],
+            },
+          ],
+        },
+      },
+    ],
+  };
+}
