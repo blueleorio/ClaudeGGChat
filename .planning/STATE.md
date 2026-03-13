@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: completed
-stopped_at: "04-01-PLAN.md complete — Wave 0 TDD gate established"
-last_updated: "2026-03-13T08:28:00.000Z"
+stopped_at: 04-02-PLAN.md complete — Thread context injection and production hardening implemented
+last_updated: "2026-03-13T08:35:30.992Z"
 last_activity: "2026-03-13 - Completed 04-01: Phase 4 failing test stubs (Wave 0 TDD gate)"
 progress:
   total_phases: 4
   completed_phases: 3
   total_plans: 10
-  completed_plans: 8
+  completed_plans: 9
   percent: 64
 ---
 
@@ -57,6 +57,7 @@ Progress: [███████░░░] 64%
 | Phase 03-core-claude-integration P01 | 8 | 2 tasks | 5 files |
 | Phase 03-core-claude-integration P02 | 6 | 2 tasks | 4 files |
 | Phase 03-core-claude-integration P03 | ~15 | 2 tasks | 2 files |
+| Phase 04-thread-context-production-hardening P02 | 5 | 3 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -91,6 +92,9 @@ Recent decisions affecting current work:
 - [Phase 04-01]: @ts-expect-error on callClaude(prompt, context) call allows existing 7 tests to compile+run while new CLDE-02 stub stays RED at runtime assertion level
 - [Phase 04-01]: CONT-03 test asserts callClaude called with empty [] on list rejection — tests graceful degradation, not hard failure
 - [Phase 04-01]: jest.spyOn(process, 'exit').mockImplementation(() => { throw new Error }) prevents Jest process termination in validateEnv tests
+- [Phase 04-02]: validateEnv() in require.main guard only to avoid breaking supertest imports
+- [Phase 04-02]: ContextMessage type exported from anthropicClient.ts for cross-module contract without circular deps
+- [Phase 04-02]: Thread context fetch in Step 0 inside setImmediate block; structured log emits in both success/error PATCH paths
 
 ### Pending Todos
 
@@ -114,6 +118,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-13T08:28:00.000Z
-Stopped at: 04-01-PLAN.md complete — Wave 0 TDD gate established
-Resume file: .planning/phases/04-thread-context-production-hardening/04-02-PLAN.md
+Last session: 2026-03-13T08:35:30.989Z
+Stopped at: 04-02-PLAN.md complete — Thread context injection and production hardening implemented
+Resume file: None
