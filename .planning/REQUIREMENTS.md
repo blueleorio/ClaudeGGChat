@@ -18,14 +18,14 @@
 
 ### Context
 
-- [ ] **CONT-01**: Bot fetches the last 10 messages from the current thread before calling Claude
-- [ ] **CONT-02**: Bot filters out its own messages from thread context (by `sender.type === 'BOT'`)
-- [ ] **CONT-03**: Thread context fetch failure (e.g. 403) is handled gracefully — Claude is called without context rather than failing
+- [x] **CONT-01**: Bot fetches the last 10 messages from the current thread before calling Claude
+- [x] **CONT-02**: Bot filters out its own messages from thread context (by `sender.type === 'BOT'`)
+- [x] **CONT-03**: Thread context fetch failure (e.g. 403) is handled gracefully — Claude is called without context rather than failing
 
 ### Claude
 
 - [x] **CLDE-01**: Bot calls `claude-sonnet-4-6` with a SEV team system prompt and the user's prompt
-- [ ] **CLDE-02**: Thread context messages are passed to Claude as context preceding the user prompt
+- [x] **CLDE-02**: Thread context messages are passed to Claude as context preceding the user prompt
 - [x] **CLDE-03**: Bot posts a "Thinking…" placeholder card immediately after receiving the command, then PATCHes it with Claude's reply
 - [x] **CLDE-04**: Anthropic rate limit errors (429/529) result in a user-facing error card rather than a silent failure
 - [x] **CLDE-05**: Anthropic timeout (25s budget) results in a user-facing error card
@@ -40,8 +40,8 @@
 
 - [x] **INFRA-01**: Server binds to `process.env.PORT` for Railway compatibility
 - [x] **INFRA-02**: `GET /health` endpoint returns HTTP 200 for Railway health checks
-- [ ] **INFRA-03**: Startup validation fails loudly (process exits) if required env vars are missing (`ANTHROPIC_API_KEY`, `ALLOWED_SPACE_IDS`, `GOOGLE_SERVICE_ACCOUNT_KEY`)
-- [ ] **INFRA-04**: Structured logging includes request ID, space ID, command, and response latency for each invocation
+- [x] **INFRA-03**: Startup validation fails loudly (process exits) if required env vars are missing (`ANTHROPIC_API_KEY`, `ALLOWED_SPACE_IDS`, `GOOGLE_SERVICE_ACCOUNT_KEY`)
+- [x] **INFRA-04**: Structured logging includes request ID, space ID, command, and response latency for each invocation
 
 ## v2 Requirements
 
@@ -86,12 +86,12 @@
 | RESP-01 | Phase 3 | Complete |
 | RESP-02 | Phase 3 | Complete |
 | RESP-03 | Phase 3 | Complete |
-| CONT-01 | Phase 4 | Pending |
-| CONT-02 | Phase 4 | Pending |
-| CONT-03 | Phase 4 | Pending |
-| CLDE-02 | Phase 4 | Pending |
-| INFRA-03 | Phase 4 | Pending |
-| INFRA-04 | Phase 4 | Pending |
+| CONT-01 | Phase 4 | Complete |
+| CONT-02 | Phase 4 | Complete |
+| CONT-03 | Phase 4 | Complete |
+| CLDE-02 | Phase 4 | Complete |
+| INFRA-03 | Phase 4 | Complete |
+| INFRA-04 | Phase 4 | Complete |
 
 **Coverage:**
 - v1 requirements: 20 total

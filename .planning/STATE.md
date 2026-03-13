@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: completed
-stopped_at: "Completed quick-1-1-PLAN.md — consistency pass: test body shapes updated, debug console.log calls removed"
-last_updated: "2026-03-13T07:52:13.547Z"
-last_activity: 2026-03-13 — Completed 03-03 (chatEvent async lifecycle, live Railway deploy, end-to-end Claude reply CONFIRMED in Google Chat)
+stopped_at: "04-01-PLAN.md complete — Wave 0 TDD gate established"
+last_updated: "2026-03-13T08:28:00.000Z"
+last_activity: "2026-03-13 - Completed 04-01: Phase 4 failing test stubs (Wave 0 TDD gate)"
 progress:
   total_phases: 4
   completed_phases: 3
-  total_plans: 7
-  completed_plans: 7
-  percent: 57
+  total_plans: 10
+  completed_plans: 8
+  percent: 64
 ---
 
 # Project State
@@ -21,16 +21,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-12)
 
 **Core value:** Any SEV teammate can query Claude directly from Google Chat, in context, without leaving their workflow
-**Current focus:** Phase 3 — Core Claude Integration
+**Current focus:** Phase 4 — Thread Context + Production Hardening
 
 ## Current Position
 
-Phase: 3 of 4 — Core Claude Integration (COMPLETE)
-Plan: 3 of 3 in Phase 3 (COMPLETE)
-Status: Phase 3 COMPLETE — Phase 4 (Context Threading) is next
-Last activity: 2026-03-13 - Completed quick task 1: review code for consistency after json nesting bug fixes
+Phase: 4 of 4 — Thread Context + Production Hardening (IN PROGRESS)
+Plan: 1 of 3 in Phase 4 (COMPLETE — Wave 0 TDD gate)
+Status: Phase 4 Plan 01 COMPLETE — Plan 02 (implementation) is next
+Last activity: 2026-03-13 - Completed 04-01: Phase 4 failing test stubs (Wave 0 TDD gate)
 
-Progress: [██████░░░░] 57%
+Progress: [███████░░░] 64%
 
 ## Performance Metrics
 
@@ -88,6 +88,9 @@ Recent decisions affecting current work:
 - [Phase 03-03]: Thinking card POST has own try/catch — POST failure causes early return; no PATCH attempted without a messageName
 - [Phase 03-03]: RESP-03 double-PATCH: cardsV2 PATCH attempted first; if it throws, extract plain text from replyBody and PATCH with updateMask 'text'
 - [Phase 03-03]: PATCHing a bot-created message updates in-place in Google Chat UI — confirmed live (resolves Phase 4 concern)
+- [Phase 04-01]: @ts-expect-error on callClaude(prompt, context) call allows existing 7 tests to compile+run while new CLDE-02 stub stays RED at runtime assertion level
+- [Phase 04-01]: CONT-03 test asserts callClaude called with empty [] on list rejection — tests graceful degradation, not hard failure
+- [Phase 04-01]: jest.spyOn(process, 'exit').mockImplementation(() => { throw new Error }) prevents Jest process termination in validateEnv tests
 
 ### Pending Todos
 
@@ -111,6 +114,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-13T07:52:13.544Z
-Stopped at: Completed quick-1-1-PLAN.md — consistency pass: test body shapes updated, debug console.log calls removed
-Resume file: None
+Last session: 2026-03-13T08:28:00.000Z
+Stopped at: 04-01-PLAN.md complete — Wave 0 TDD gate established
+Resume file: .planning/phases/04-thread-context-production-hardening/04-02-PLAN.md

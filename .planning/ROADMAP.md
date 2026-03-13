@@ -80,7 +80,7 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] 04-01-PLAN.md — Wave 0 (TDD): failing test stubs for all Phase 4 requirements (autonomous)
+- [x] 04-01-PLAN.md — Wave 0 (TDD): failing test stubs for all Phase 4 requirements (autonomous)
 - [ ] 04-02-PLAN.md — Wave 1: validateEnv.ts, extended callClaude, chatEvent.ts thread fetch + logging, index.ts wiring — makes tests GREEN (autonomous)
 - [ ] 04-03-PLAN.md — Wave 2: Railway deploy + live verification of thread context, logging, startup validation (human checkpoint)
 
@@ -94,4 +94,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 | 1. GCP & Railway Setup | 2/2 | Complete    | 2026-03-12 |
 | 2. Secure Webhook Foundation | 2/2 | Complete    | 2026-03-13 |
 | 3. Core Claude Integration | 3/3 | Complete    | 2026-03-13 |
-| 4. Thread Context + Production Hardening | 0/3 | Not started | - |
+| 4. Thread Context + Production Hardening | 1/3 | In Progress | - |
