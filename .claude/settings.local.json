@@ -53,7 +53,10 @@
       "Bash(test -f \".planning/phases/03-core-claude-integration/03-03-SUMMARY.md\" && echo \"03-03 SUMMARY: ✓\" || echo \"03-03 SUMMARY: ✗\"\ngit log --oneline -5)",
       "Bash(node \"$HOME/.claude/get-shit-done/bin/gsd-tools.cjs\" commit \"docs\\(phase-3\\): complete phase execution\" --files \".planning/ROADMAP.md\" \".planning/STATE.md\" \".planning/REQUIREMENTS.md\" 2>&1)",
       "Bash(git add .planning/ROADMAP.md .planning/STATE.md .planning/REQUIREMENTS.md 2>/dev/null\ngit diff --cached --stat)",
-      "Bash(git commit -m \"$\\(cat <<'EOF'\ndocs\\(phase-3\\): complete phase execution\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>\nEOF\n\\)\")"
+      "Bash(git commit -m \"$\\(cat <<'EOF'\ndocs\\(phase-3\\): complete phase execution\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Skill(gsd:plan-phase)",
+      "Bash(cd /d/SEV/VSCODE/ClaudeGGChat && npx jest --no-coverage 2>&1 | tail -20)",
+      "Bash(cd D:/SEV/VSCODE/ClaudeGGChat && node \"$HOME/.claude/get-shit-done/bin/gsd-tools.cjs\" commit \"chore: archive phase directories from completed milestones\" --files .planning/milestones/ .planning/phases/)"
     ]
   }
 }

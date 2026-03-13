@@ -5,6 +5,7 @@ export function checkSpaceAllowlist(
   res: Response,
   next: NextFunction,
 ): void {
+  console.log("BODY:", JSON.stringify(req.body, null, 2));
   const allowedSpaces = (process.env.ALLOWED_SPACE_IDS ?? "")
     .split(",")
     .map((s) => s.trim())
@@ -15,6 +16,7 @@ export function checkSpaceAllowlist(
 
   if (!allowedSpaces.includes(spaceName)) {
     // Silent rejection — no error card shown to users in unauthorized spaces
+    console.log("Blocked space:", spaceName);
     res.status(200).json({});
     return;
   }
