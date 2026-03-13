@@ -7,9 +7,9 @@
 
 ### Webhook
 
-- [ ] **HOOK-01**: Bot receives and parses `/claude [prompt]` slash command events from Google Chat
-- [ ] **HOOK-02**: Bot returns HTTP 200 immediately (within ~3 seconds) and processes the Anthropic call asynchronously
-- [ ] **HOOK-03**: Bot returns a usage hint card when `/claude` is invoked with no prompt text
+- [x] **HOOK-01**: Bot receives and parses `/claude [prompt]` slash command events from Google Chat
+- [x] **HOOK-02**: Bot returns HTTP 200 immediately (within ~3 seconds) and processes the Anthropic call asynchronously
+- [x] **HOOK-03**: Bot returns a usage hint card when `/claude` is invoked with no prompt text
 
 ### Security
 
@@ -74,9 +74,9 @@
 |-------------|-------|--------|
 | INFRA-01 | Phase 1 | Complete (01-01) |
 | INFRA-02 | Phase 1 | Complete (01-01) |
-| HOOK-01 | Phase 2 | Pending |
-| HOOK-02 | Phase 2 | Pending |
-| HOOK-03 | Phase 2 | Pending |
+| HOOK-01 | Phase 2 | Complete |
+| HOOK-02 | Phase 2 | Complete |
+| HOOK-03 | Phase 2 | Complete |
 | SEC-01 | Phase 2 | Complete |
 | SEC-02 | Phase 2 | Complete |
 | CLDE-01 | Phase 3 | Pending |

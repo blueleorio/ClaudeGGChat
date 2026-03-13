@@ -13,7 +13,7 @@ ClaudeGGChat is built in four coarse phases that follow a hard dependency chain:
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: GCP & Railway Setup** - Provision infrastructure, register the bot, and confirm a live HTTPS endpoint before writing application code
-- [ ] **Phase 2: Secure Webhook Foundation** - Express server with JWT verification, space allowlist, async response pattern, and empty-prompt handling
+- [x] **Phase 2: Secure Webhook Foundation** - Express server with JWT verification, space allowlist, async response pattern, and empty-prompt handling (completed 2026-03-13)
 - [ ] **Phase 3: Core Claude Integration** - Full end-to-end bot: Thinking... placeholder, Anthropic API call, cardsV2 reply, and error handling
 - [ ] **Phase 4: Thread Context + Production Hardening** - Thread context injection, startup validation, structured logging, and Railway health check
 
@@ -47,8 +47,8 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 02-01-PLAN.md — Security middleware: JWT verification + space allowlist + test scaffold (autonomous)
-- [ ] 02-02-PLAN.md — Event handler: cards helper, chatEvent handler, index.ts wiring, Railway deploy + live verification (human checkpoint)
+- [x] 02-01-PLAN.md — Security middleware: JWT verification + space allowlist + test scaffold (autonomous)
+- [x] 02-02-PLAN.md — Event handler: cards helper, chatEvent handler, index.ts wiring, Railway deploy + live verification (human checkpoint)
 
 ### Phase 3: Core Claude Integration
 **Goal**: Any SEV teammate in an authorized space can type `/claude [prompt]` and receive Claude's reply posted as a Google Chat card — the full user-visible value delivered end-to-end without thread context
@@ -82,6 +82,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. GCP & Railway Setup | 2/2 | Complete    | 2026-03-12 |
-| 2. Secure Webhook Foundation | 1/2 | In Progress|  |
+| 2. Secure Webhook Foundation | 2/2 | Complete   | 2026-03-13 |
 | 3. Core Claude Integration | 0/TBD | Not started | - |
 | 4. Thread Context + Production Hardening | 0/TBD | Not started | - |

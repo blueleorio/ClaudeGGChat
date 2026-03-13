@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: completed
-stopped_at: Completed 02-01-PLAN.md — JWT verification + space allowlist middleware, all tests GREEN
-last_updated: "2026-03-12T14:34:10.426Z"
-last_activity: 2026-03-12 — Completed 02-01 (JWT verification + space allowlist middleware, all tests GREEN)
+stopped_at: Completed 02-02-PLAN.md — chat event handler, cards helper, middleware chain wired, live Railway verification CONFIRMED
+last_updated: "2026-03-13T02:19:51.295Z"
+last_activity: 2026-03-13 — Completed 02-02 (chat event handler, cards helper, full middleware chain, live Railway verification CONFIRMED)
 progress:
   total_phases: 4
-  completed_phases: 1
+  completed_phases: 2
   total_plans: 4
-  completed_plans: 3
-  percent: 20
+  completed_plans: 4
+  percent: 50
 ---
 
 # Project State
@@ -21,16 +21,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-12)
 
 **Core value:** Any SEV teammate can query Claude directly from Google Chat, in context, without leaving their workflow
-**Current focus:** Phase 2 — Secure Webhook Foundation
+**Current focus:** Phase 3 — Core Claude Integration
 
 ## Current Position
 
-Phase: 2 of 4 (Secure Webhook Foundation)
-Plan: 1 of 2 in current phase (1 COMPLETE)
-Status: Phase 2 in progress — Plan 01 complete (JWT + allowlist middleware), Plan 02 next
-Last activity: 2026-03-12 — Completed 02-01 (JWT verification + space allowlist middleware, all tests GREEN)
+Phase: 2 of 4 COMPLETE (Secure Webhook Foundation)
+Plan: 2 of 2 in Phase 2 (COMPLETE)
+Status: Phase 2 COMPLETE — Phase 3 (Core Claude Integration) is next
+Last activity: 2026-03-13 — Completed 02-02 (chat event handler, cards helper, full middleware chain, live Railway verification CONFIRMED)
 
-Progress: [████████░░] 75%
+Progress: [█████░░░░░] 50%
 
 ## Performance Metrics
 
@@ -46,12 +46,12 @@ Progress: [████████░░] 75%
 | 1. GCP & Railway Setup | 2 | ~2h 2min | ~61 min |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (2 min), 01-02 (~2h), 02-01 (12 min)
+- Last 5 plans: 01-01 (2 min), 01-02 (~2h), 02-01 (12 min), 02-02 (45 min)
 - Trend: -
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| 2. Secure Webhook Foundation | 1 | ~12 min | ~12 min |
+| 2. Secure Webhook Foundation | 2 | ~57 min | ~28 min |
 
 *Updated after each plan completion*
 
@@ -74,6 +74,8 @@ Recent decisions affecting current work:
 - [Phase 02-01]: google-auth-library (not jsonwebtoken+jwks-rsa) used for OIDC JWT verification — handles JWKS caching and cert rotation automatically
 - [Phase 02-01]: Silent rejection (200 empty body) for unauthorized spaces so no error card appears in Google Chat UI
 - [Phase 02-01]: Module-level OAuth2Client singleton in verifyGoogleJwt.ts so JWKS caching works across requests in production
+- [Phase 02-02]: JWT audience must be BOT_ENDPOINT (Railway URL) not GOOGLE_CLOUD_PROJECT_NUMBER — app is a Google Workspace Add-on, not a native Chat App
+- [Phase 02-02]: setImmediate used for async stub to guarantee 200 flushes before async work — meets Google Chat 3s timeout
 
 ### Pending Todos
 
@@ -86,10 +88,11 @@ None yet.
 
 **Resolved blockers:**
 - [Phase 1 - RESOLVED]: JWT verification method confirmed — Google Chat sends OIDC JWT with audience = numeric project number; Phase 2 must verify against GOOGLE_CLOUD_PROJECT_NUMBER
+- [Phase 1 - SUPERSEDED by 02-02]: JWT audience is actually BOT_ENDPOINT (Railway URL), not GOOGLE_CLOUD_PROJECT_NUMBER — app is a Workspace Add-on; audience decision from 01-02 was incorrect
 - [Phase 1 - RESOLVED]: Railway URL now known — https://claudeggchat-production.up.railway.app
 
 ## Session Continuity
 
-Last session: 2026-03-12T14:34:10.423Z
-Stopped at: Completed 02-01-PLAN.md — JWT verification + space allowlist middleware, all tests GREEN
+Last session: 2026-03-13T02:19:16.277Z
+Stopped at: Completed 02-02-PLAN.md — chat event handler, cards helper, middleware chain wired, live Railway verification CONFIRMED
 Resume file: None
