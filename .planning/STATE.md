@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: completed
-stopped_at: Completed 03-02-PLAN.md — anthropicClient, systemPrompt, chatClient, extended cards; claude.test.ts and cards.test.ts GREEN
-last_updated: "2026-03-13T02:58:28.243Z"
-last_activity: 2026-03-13 — Completed 02-02 (chat event handler, cards helper, full middleware chain, live Railway verification CONFIRMED)
+stopped_at: Completed 03-03-PLAN.md — full Thinking card lifecycle, RESP-03 fallback, live Railway deploy verified in Google Chat
+last_updated: "2026-03-13T03:30:00.000Z"
+last_activity: 2026-03-13 — Completed 03-03 (chatEvent async lifecycle, live Railway deploy, end-to-end Claude reply CONFIRMED in Google Chat)
 progress:
   total_phases: 4
   completed_phases: 2
   total_plans: 7
-  completed_plans: 6
-  percent: 50
+  completed_plans: 7
+  percent: 57
 ---
 
 # Project State
@@ -25,12 +25,12 @@ See: .planning/PROJECT.md (updated 2026-03-12)
 
 ## Current Position
 
-Phase: 2 of 4 COMPLETE (Secure Webhook Foundation)
-Plan: 2 of 2 in Phase 2 (COMPLETE)
-Status: Phase 2 COMPLETE — Phase 3 (Core Claude Integration) is next
-Last activity: 2026-03-13 — Completed 02-02 (chat event handler, cards helper, full middleware chain, live Railway verification CONFIRMED)
+Phase: 3 of 4 — Core Claude Integration (COMPLETE)
+Plan: 3 of 3 in Phase 3 (COMPLETE)
+Status: Phase 3 COMPLETE — Phase 4 (Context Threading) is next
+Last activity: 2026-03-13 — Completed 03-03 (chatEvent async lifecycle, live Railway deploy, end-to-end Claude reply CONFIRMED in Google Chat)
 
-Progress: [█████░░░░░] 50%
+Progress: [██████░░░░] 57%
 
 ## Performance Metrics
 
@@ -56,6 +56,7 @@ Progress: [█████░░░░░] 50%
 *Updated after each plan completion*
 | Phase 03-core-claude-integration P01 | 8 | 2 tasks | 5 files |
 | Phase 03-core-claude-integration P02 | 6 | 2 tasks | 4 files |
+| Phase 03-core-claude-integration P03 | ~15 | 2 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -84,6 +85,9 @@ Recent decisions affecting current work:
 - [Phase 03-02]: callClaude does NOT catch SDK errors — callers handle Anthropic error classes
 - [Phase 03-02]: ANTHROPIC_API_KEY guard throws at import time — missing key causes startup failure
 - [Phase 03-02]: chatClient singleton instantiated at module load; tests mock entire module so real GOOGLE_SERVICE_ACCOUNT_KEY not needed in tests
+- [Phase 03-03]: Thinking card POST has own try/catch — POST failure causes early return; no PATCH attempted without a messageName
+- [Phase 03-03]: RESP-03 double-PATCH: cardsV2 PATCH attempted first; if it throws, extract plain text from replyBody and PATCH with updateMask 'text'
+- [Phase 03-03]: PATCHing a bot-created message updates in-place in Google Chat UI — confirmed live (resolves Phase 4 concern)
 
 ### Pending Todos
 
@@ -92,15 +96,15 @@ None yet.
 ### Blockers/Concerns
 
 - [Phase 4]: `spaces.messages.list` thread filter syntax (AIP-160) needs live API verification before Phase 4 implementation
-- [Phase 4]: Confirm that PATCHing a bot-created message updates in-place in Google Chat UI (affects "Thinking..." UX)
 
 **Resolved blockers:**
 - [Phase 1 - RESOLVED]: JWT verification method confirmed — Google Chat sends OIDC JWT with audience = numeric project number; Phase 2 must verify against GOOGLE_CLOUD_PROJECT_NUMBER
 - [Phase 1 - SUPERSEDED by 02-02]: JWT audience is actually BOT_ENDPOINT (Railway URL), not GOOGLE_CLOUD_PROJECT_NUMBER — app is a Workspace Add-on; audience decision from 01-02 was incorrect
 - [Phase 1 - RESOLVED]: Railway URL now known — https://claudeggchat-production.up.railway.app
+- [Phase 4 - RESOLVED by 03-03]: PATCHing a bot-created message updates in-place in Google Chat UI — confirmed via live end-to-end verification of "Thinking..." → reply card transition
 
 ## Session Continuity
 
-Last session: 2026-03-13T02:58:28.236Z
-Stopped at: Completed 03-02-PLAN.md — anthropicClient, systemPrompt, chatClient, extended cards; claude.test.ts and cards.test.ts GREEN
+Last session: 2026-03-13T03:30:00.000Z
+Stopped at: Completed 03-03-PLAN.md — full Thinking card lifecycle, RESP-03 fallback, live Railway deploy verified in Google Chat
 Resume file: None

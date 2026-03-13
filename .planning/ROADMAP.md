@@ -14,7 +14,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: GCP & Railway Setup** - Provision infrastructure, register the bot, and confirm a live HTTPS endpoint before writing application code
 - [x] **Phase 2: Secure Webhook Foundation** - Express server with JWT verification, space allowlist, async response pattern, and empty-prompt handling (completed 2026-03-13)
-- [ ] **Phase 3: Core Claude Integration** - Full end-to-end bot: Thinking... placeholder, Anthropic API call, cardsV2 reply, and error handling
+- [x] **Phase 3: Core Claude Integration** - Full end-to-end bot: Thinking... placeholder, Anthropic API call, cardsV2 reply, and error handling (completed 2026-03-13)
 - [ ] **Phase 4: Thread Context + Production Hardening** - Thread context injection, startup validation, structured logging, and Railway health check
 
 ## Phase Details
@@ -63,9 +63,9 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] 03-01-PLAN.md — Wave 0: install @anthropic-ai/sdk and create failing test scaffolds for all Phase 3 requirements (autonomous)
-- [ ] 03-02-PLAN.md — Wave 1: anthropicClient.ts, systemPrompt.ts, chatClient.ts, and cards.ts extensions — makes tests GREEN (autonomous)
-- [ ] 03-03-PLAN.md — Wave 2: expand chatEvent.ts async stub into full Thinking→Claude→PATCH lifecycle, Railway deploy, live verification (human checkpoint)
+- [x] 03-01-PLAN.md — Wave 0: install @anthropic-ai/sdk and create failing test scaffolds for all Phase 3 requirements (autonomous)
+- [x] 03-02-PLAN.md — Wave 1: anthropicClient.ts, systemPrompt.ts, chatClient.ts, and cards.ts extensions — makes tests GREEN (autonomous)
+- [x] 03-03-PLAN.md — Wave 2: expand chatEvent.ts async stub into full Thinking→Claude→PATCH lifecycle, Railway deploy, live verification (human checkpoint)
 
 ### Phase 4: Thread Context + Production Hardening
 **Goal**: Claude receives the last 10 messages from the current thread as context before answering, the server fails loudly on bad configuration rather than silently misbehaving, and every invocation produces a structured log entry
@@ -88,5 +88,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 |-------|----------------|--------|-----------|
 | 1. GCP & Railway Setup | 2/2 | Complete    | 2026-03-12 |
 | 2. Secure Webhook Foundation | 2/2 | Complete    | 2026-03-13 |
-| 3. Core Claude Integration | 2/3 | In Progress|  |
+| 3. Core Claude Integration | 3/3 | Complete    | 2026-03-13 |
 | 4. Thread Context + Production Hardening | 0/TBD | Not started | - |
