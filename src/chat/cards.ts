@@ -64,3 +64,17 @@ export function buildErrorCard(errorMessage: string): object {
     ],
   };
 }
+
+export function buildThinkingCard(): object {
+  return {
+    cardsV2: [
+      {
+        cardId: 'thinking',
+        card: {
+          header: { title: 'Claude', subtitle: 'Thinking...' },
+          sections: [],
+        },
+      },
+    ],
+  };
+}

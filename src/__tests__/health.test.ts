@@ -1,4 +1,20 @@
 import request from 'supertest';
+
+jest.mock('../chat/chatClient', () => ({
+  chatClient: {
+    spaces: {
+      messages: {
+        create: jest.fn().mockResolvedValue({ data: { name: 'spaces/X/messages/m1' } }),
+        patch: jest.fn().mockResolvedValue({}),
+      },
+    },
+  },
+}));
+
+jest.mock('../claude/anthropicClient', () => ({
+  callClaude: jest.fn().mockResolvedValue('mocked reply'),
+}));
+
 import { app } from '../index';
 
 describe('GET /health', () => {
