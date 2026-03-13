@@ -86,4 +86,29 @@ describe('callClaude', () => {
       Anthropic.APIConnectionTimeoutError,
     );
   });
+
+  it('passes context messages before user prompt in messages array when context provided (CLDE-02)', async () => {
+    mockCreate.mockResolvedValue({
+      content: [{ type: 'text', text: 'Reply' }],
+    });
+    const context = [{ role: 'user' as const, content: 'prior message' }];
+    // @ts-expect-error: callClaude does not accept context yet — RED test, Plan 02 adds the param
+    await callClaude('prompt', context);
+    const callArgs = mockCreate.mock.calls[0][0];
+    const messages: { role: string; content: string }[] = callArgs.messages;
+    const contextIndex = messages.findIndex(m => m.content === 'prior message');
+    const promptIndex = messages.findIndex(m => m.content === 'prompt');
+    expect(contextIndex).toBeGreaterThanOrEqual(0);
+    expect(promptIndex).toBeGreaterThan(contextIndex);
+  });
+
+  it('calls anthropic.messages.create with only user prompt when no context provided (CLDE-02 backward compat)', async () => {
+    mockCreate.mockResolvedValue({
+      content: [{ type: 'text', text: 'Reply' }],
+    });
+    // No second arg — backward compat check; this assertion fails until Plan 02 tightens messages array
+    await callClaude('test prompt');
+    const callArgs = mockCreate.mock.calls[0][0];
+    expect(callArgs.messages).toEqual([{ role: 'user', content: 'test prompt' }]);
+  });
 });
