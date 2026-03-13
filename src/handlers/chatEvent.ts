@@ -1,17 +1,25 @@
-import { Request, Response } from 'express';
-import Anthropic from '@anthropic-ai/sdk';
-import { chatClient } from '../chat/chatClient';
-import { callClaude } from '../claude/anthropicClient';
-import { buildUsageHintCard, buildReplyCard, buildErrorCard, buildThinkingCard } from '../chat/cards';
+import { Request, Response } from "express";
+import Anthropic from "@anthropic-ai/sdk";
+import { chatClient } from "../chat/chatClient";
+import { callClaude } from "../claude/anthropicClient";
+import {
+  buildUsageHintCard,
+  buildReplyCard,
+  buildErrorCard,
+  buildThinkingCard,
+} from "../chat/cards";
 
-export async function handleChatEvent(req: Request, res: Response): Promise<void> {
+export async function handleChatEvent(
+  req: Request,
+  res: Response,
+): Promise<void> {
   // Guard: only handle slash command events
   if (!req.body?.message?.slashCommand) {
     res.status(200).json({});
     return;
   }
 
-  const argumentText = (req.body.message?.argumentText ?? '').trim();
+  const argumentText = (req.body.message?.argumentText ?? "").trim();
 
   // HOOK-03: Empty prompt — return usage hint card synchronously
   if (!argumentText) {
@@ -32,7 +40,7 @@ export async function handleChatEvent(req: Request, res: Response): Promise<void
       try {
         const placeholderRes = await chatClient.spaces.messages.create({
           parent: spaceName,
-          messageReplyOption: 'REPLY_MESSAGE_FALLBACK_TO_NEW_THREAD',
+          messageReplyOption: "REPLY_MESSAGE_FALLBACK_TO_NEW_THREAD",
           requestBody: {
             thread: { name: threadName },
             ...buildThinkingCard(),
@@ -40,7 +48,7 @@ export async function handleChatEvent(req: Request, res: Response): Promise<void
         });
         messageName = placeholderRes.data.name!;
       } catch (err) {
-        console.error('[async] Failed to post Thinking card:', err);
+        console.error("[async] Failed to post Thinking card:", err);
         return; // No message to PATCH — exit early
       }
 
@@ -54,14 +62,18 @@ export async function handleChatEvent(req: Request, res: Response): Promise<void
       } catch (err) {
         let errorMessage: string;
         if (err instanceof Anthropic.APIConnectionTimeoutError) {
-          errorMessage = 'Request timed out after 25 seconds. Please try again.';
+          errorMessage =
+            "Request timed out after 25 seconds. Please try again.";
         } else if (
           err instanceof Anthropic.RateLimitError ||
-          (err instanceof Anthropic.InternalServerError && (err as InstanceType<typeof Anthropic.InternalServerError>).status === 529)
+          (err instanceof Anthropic.InternalServerError &&
+            (err as InstanceType<typeof Anthropic.InternalServerError>)
+              .status === 529)
         ) {
-          errorMessage = 'Claude is currently rate-limited or overloaded. Please try again in a moment.';
+          errorMessage =
+            "Claude is currently rate-limited or overloaded. Please try again in a moment.";
         } else {
-          errorMessage = 'An unexpected error occurred. Please try again.';
+          errorMessage = "An unexpected error occurred. Please try again.";
         }
         replyBody = buildErrorCard(errorMessage);
         fallbackText = errorMessage;
@@ -71,7 +83,7 @@ export async function handleChatEvent(req: Request, res: Response): Promise<void
       try {
         await chatClient.spaces.messages.patch({
           name: messageName,
-          updateMask: 'cardsV2',
+          updateMask: "cardsV2",
           requestBody: replyBody,
         });
       } catch {
@@ -79,11 +91,14 @@ export async function handleChatEvent(req: Request, res: Response): Promise<void
         try {
           await chatClient.spaces.messages.patch({
             name: messageName,
-            updateMask: 'text',
+            updateMask: "text",
             requestBody: { text: fallbackText },
           });
         } catch {
-          console.error('[async] Failed to post both card and plain-text reply for message:', messageName);
+          console.error(
+            "[async] Failed to post both card and plain-text reply for message:",
+            messageName,
+          );
         }
       }
     })();

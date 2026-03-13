@@ -47,7 +47,13 @@
       "Bash(cd D:/SEV/VSCODE/ClaudeGGChat && npx jest src/__tests__/claude.test.ts 2>&1 | head -40)",
       "Bash(cd D:/SEV/VSCODE/ClaudeGGChat && npx jest 2>&1 | grep -E \"FAIL|PASS|Tests:|Test Suites:\")",
       "Bash(cd D:/SEV/VSCODE/ClaudeGGChat && npx jest src/__tests__/health.test.ts 2>&1 | head -20)",
-      "Bash(cd D:/SEV/VSCODE/ClaudeGGChat && npx jest src/__tests__/health.test.ts src/__tests__/webhook.test.ts 2>&1 | tail -20)"
+      "Bash(cd D:/SEV/VSCODE/ClaudeGGChat && npx jest src/__tests__/health.test.ts src/__tests__/webhook.test.ts 2>&1 | tail -20)",
+      "Bash(cd D:/SEV/VSCODE/ClaudeGGChat && node \"$HOME/.claude/get-shit-done/bin/gsd-tools.cjs\" state advance-plan 2>&1)",
+      "Bash(cd D:/SEV/VSCODE/ClaudeGGChat && node \"$HOME/.claude/get-shit-done/bin/gsd-tools.cjs\" requirements mark-complete CLDE-03 RESP-03 2>&1)",
+      "Bash(test -f \".planning/phases/03-core-claude-integration/03-03-SUMMARY.md\" && echo \"03-03 SUMMARY: ✓\" || echo \"03-03 SUMMARY: ✗\"\ngit log --oneline -5)",
+      "Bash(node \"$HOME/.claude/get-shit-done/bin/gsd-tools.cjs\" commit \"docs\\(phase-3\\): complete phase execution\" --files \".planning/ROADMAP.md\" \".planning/STATE.md\" \".planning/REQUIREMENTS.md\" 2>&1)",
+      "Bash(git add .planning/ROADMAP.md .planning/STATE.md .planning/REQUIREMENTS.md 2>/dev/null\ngit diff --cached --stat)",
+      "Bash(git commit -m \"$\\(cat <<'EOF'\ndocs\\(phase-3\\): complete phase execution\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>\nEOF\n\\)\")"
     ]
   }
 }

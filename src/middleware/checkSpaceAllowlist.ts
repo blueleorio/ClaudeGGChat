@@ -1,18 +1,31 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response, NextFunction } from "express";
 
 export function checkSpaceAllowlist(
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ): void {
-  const allowedSpaces = (process.env.ALLOWED_SPACE_IDS ?? '')
-    .split(',')
-    .map(s => s.trim())
+  const allowedSpaces = (process.env.ALLOWED_SPACE_IDS ?? "")
+    .split(",")
+    .map((s) => s.trim())
     .filter(Boolean);
 
-  const spaceName: string = req.body?.space?.name ?? '';
+  // const spaceName: string = req.body?.space?.name ?? "";
+  const spaceName: string =
+    req.body?.chat?.message?.space?.name ?? req.body?.space?.name ?? "";
+
+  const threadName: string = req.body?.chat?.message?.thread?.name ?? "";
+
+  const prompt: string =
+    req.body?.appCommandPayload?.argumentText?.trim() ?? "";
+
+  console.log("Received spaceName:", spaceName);
+  console.log("Received threadName:", threadName);
+  console.log("Received promt:", prompt);
+
   if (!allowedSpaces.includes(spaceName)) {
     // Silent rejection — no error card shown to users in unauthorized spaces
+
     res.status(200).json({});
     return;
   }
