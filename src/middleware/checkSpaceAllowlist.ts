@@ -27,7 +27,7 @@ export function checkSpaceAllowlist(
 
   if (!allowedSpaces.includes(spaceName)) {
     // Silent rejection — no error card shown to users in unauthorized spaces
-
+    console.log("You stuck at checkSpaceAllowlist.ts:");
     res.status(200).json({});
     return;
   }

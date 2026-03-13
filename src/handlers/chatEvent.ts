@@ -13,11 +13,15 @@ export async function handleChatEvent(
   req: Request,
   res: Response,
 ): Promise<void> {
+  console.log("You somehow at chatEvent.ts");
+
   // Guard: only handle slash command events
   if (
     req.body?.chat?.appCommandPayload?.appCommandMetadata?.appCommandType !==
     "SLASH_COMMAND"
   ) {
+    console.log("You passed the SLASH_COMMAND check");
+
     res.status(200).json({});
     return;
   }
@@ -28,6 +32,8 @@ export async function handleChatEvent(
 
   // HOOK-03: Empty prompt — return usage hint card synchronously
   if (!argumentText) {
+    console.log("You passed the EMPTY_PROMT check");
+
     res.status(200).json(buildUsageHintCard());
     return;
   }
@@ -37,6 +43,8 @@ export async function handleChatEvent(
 
   setImmediate(() => {
     void (async () => {
+      console.log("You passed the SET_IMMEDIATE check");
+
       const spaceName: string =
         req.body?.chat?.appCommandPayload?.message?.space?.name;
       const threadName: string =
