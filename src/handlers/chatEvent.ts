@@ -11,6 +11,10 @@ import {
   buildThinkingCard,
 } from "../chat/cards";
 
+function handleFrappe(prompt: string): string {
+  return `🔗 Frappe integration coming soon! You asked: ${prompt}`;
+}
+
 export async function handleChatEvent(
   req: Request,
   res: Response,
@@ -21,6 +25,18 @@ export async function handleChatEvent(
     "SLASH_COMMAND"
   ) {
     res.status(200).json({});
+    return;
+  }
+
+  const appCommandId =
+    req.body?.chat?.appCommandPayload?.appCommandMetadata?.appCommandId;
+
+  // Route /frappe (command ID 2)
+  if (appCommandId === 2) {
+    const prompt = (
+      req.body?.chat?.appCommandPayload?.message?.argumentText ?? ""
+    ).trim();
+    res.status(200).json({ text: handleFrappe(prompt) });
     return;
   }
 
