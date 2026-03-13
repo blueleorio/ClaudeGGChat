@@ -60,14 +60,19 @@ Plans:
   3. Triggering an Anthropic rate limit (429/529) results in a visible error card in the thread rather than a silent failure
   4. If the Anthropic call exceeds 25 seconds, a timeout error card appears in the thread
   5. If the card schema fails to post, the bot falls back to a plain-text message rather than disappearing silently
-**Plans**: TBD
+**Plans**: 3 plans
+
+Plans:
+- [ ] 03-01-PLAN.md — Wave 0: install @anthropic-ai/sdk and create failing test scaffolds for all Phase 3 requirements (autonomous)
+- [ ] 03-02-PLAN.md — Wave 1: anthropicClient.ts, systemPrompt.ts, chatClient.ts, and cards.ts extensions — makes tests GREEN (autonomous)
+- [ ] 03-03-PLAN.md — Wave 2: expand chatEvent.ts async stub into full Thinking→Claude→PATCH lifecycle, Railway deploy, live verification (human checkpoint)
 
 ### Phase 4: Thread Context + Production Hardening
 **Goal**: Claude receives the last 10 messages from the current thread as context before answering, the server fails loudly on bad configuration rather than silently misbehaving, and every invocation produces a structured log entry
 **Depends on**: Phase 3
 **Requirements**: CONT-01, CONT-02, CONT-03, CLDE-02, INFRA-03, INFRA-04
 **Success Criteria** (what must be TRUE):
-  1. Claude's reply demonstrably incorporates thread context — asking "what did I just say?" after a previous message returns an accurate answer
+  1. Claude's reply demonstrably incorporates thread context — asking "what did I just said?" after a previous message returns an accurate answer
   2. Bot's own previous messages are excluded from thread context (no self-referential noise)
   3. If the thread context fetch returns 403, the bot still calls Claude and posts a reply (without context) rather than failing
   4. Starting the server with a missing required env var causes an immediate process exit with a clear error message — not a runtime crash later
@@ -82,6 +87,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. GCP & Railway Setup | 2/2 | Complete    | 2026-03-12 |
-| 2. Secure Webhook Foundation | 2/2 | Complete   | 2026-03-13 |
-| 3. Core Claude Integration | 0/TBD | Not started | - |
+| 2. Secure Webhook Foundation | 2/2 | Complete    | 2026-03-13 |
+| 3. Core Claude Integration | 0/3 | Not started | - |
 | 4. Thread Context + Production Hardening | 0/TBD | Not started | - |
