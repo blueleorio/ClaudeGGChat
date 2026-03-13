@@ -20,7 +20,7 @@ export function checkSpaceAllowlist(
   const prompt: string =
     req.body?.chat?.appCommandPayload?.message?.argumentText?.trim() ?? "";
 
-  console.log("BODY:", JSON.stringify(req.body, null, 2));
+  // console.log("BODY:", JSON.stringify(req.body, null, 2));
   console.log("Received spaceName:", spaceName);
   console.log("Received threadName:", threadName);
   console.log("Received promt:", prompt);

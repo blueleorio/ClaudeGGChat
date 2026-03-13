@@ -14,12 +14,17 @@ export async function handleChatEvent(
   res: Response,
 ): Promise<void> {
   // Guard: only handle slash command events
-  if (!req.body?.message?.slashCommand) {
+  if (
+    req.body?.chat?.appCommandPayload?.appCommandMetadata?.appCommandType !==
+    "SLASH_COMMAND"
+  ) {
     res.status(200).json({});
     return;
   }
 
-  const argumentText = (req.body.message?.argumentText ?? "").trim();
+  const argumentText = (
+    req.body?.chat?.appCommandPayload?.message?.argumentText ?? ""
+  ).trim();
 
   // HOOK-03: Empty prompt — return usage hint card synchronously
   if (!argumentText) {
@@ -32,8 +37,10 @@ export async function handleChatEvent(
 
   setImmediate(() => {
     void (async () => {
-      const spaceName: string = req.body.space.name;
-      const threadName: string = req.body.message.thread.name;
+      const spaceName: string =
+        req.body?.chat?.appCommandPayload?.message?.space?.name;
+      const threadName: string =
+        req.body?.chat?.appCommandPayload?.message?.thread?.name;
 
       // Step 1: Post "Thinking..." placeholder card
       let messageName: string;
